@@ -183,3 +183,5 @@ module.controller('AppCtrl', ['$scope', 'USER_ROLES', 'AuthService' ,function ($
 module.factory('QueryBuilder', function () {
   return QueryBuilder;
 });
+
+export default module.name;

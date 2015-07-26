@@ -26,7 +26,7 @@ gulp.task('partials', function () {
 });
 
 gulp.task('html', ['inject', 'partials'], function () {
-  var partialsInjectFile = gulp.src(path.join(conf.paths.tmp, '/partials/templateCacheHtml.js'), { read: false });
+  var partialsInjectFile = gulp.src(path.join(conf.paths.tmp, '/partials/templateCacheHtml.js'));
   var partialsInjectOptions = {
     starttag: '<!-- inject:partials -->',
     ignorePath: path.join(conf.paths.tmp, '/partials'),
@@ -43,8 +43,8 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe(assets = $.useref.assets())
     .pipe($.rev())
     .pipe(jsFilter)
-    .pipe($.ngAnnotate())
-    .pipe($.uglify({ preserveComments: $.uglifySaveLicense })).on('error', conf.errorHandler('Uglify'))
+    //.pipe($.ngAnnotate())
+    //.pipe($.uglify({ preserveComments: $.uglifySaveLicense })).on('error', conf.errorHandler('Uglify'))
     .pipe(jsFilter.restore())
     .pipe(cssFilter)
     .pipe($.replace('../../bower_components/bootstrap-stylus/fonts/', '../fonts/'))
@@ -94,7 +94,7 @@ gulp.task('clean', function (done) {
 gulp.task('build', ['html', 'fonts', 'other']);
 
 gulp.task('scp', function () {
-  return gulp.src(paths.dist + '/**/*')
+  return gulp.src(conf.paths.dist + '/**/*')
     .pipe($.scp2(conf.credentials))
     .on('error', function(err) {
       console.log(err);
