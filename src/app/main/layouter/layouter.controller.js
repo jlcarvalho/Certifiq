@@ -1,6 +1,5 @@
 class LayouterCtrl {
   constructor ($state, Restangular) {
-    'ngInject';
     this.form = {};
     this.form.variaveis = ['{nome}', '{email}'];
 
@@ -75,5 +74,7 @@ class LayouterCtrl {
     return !!(form && form.content);
   }
 }
+
+LayouterCtrl.$inject = ['$state', 'Restangular'];
 
 export default LayouterCtrl;

@@ -4,8 +4,6 @@
 
 class FragmentoDirective {
   constructor () {
-    'ngInject';
-
     let directive = {
       restrict: 'E',
       scope: {

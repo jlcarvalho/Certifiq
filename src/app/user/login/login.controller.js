@@ -1,10 +1,9 @@
 class LoginCtrl {
   constructor ($rootScope, $state, Restangular, AuthService, AUTH_EVENTS) {
-      'ngInject';
     if(AuthService.isAuthenticated()) {
         $state.go('home');
     }
-      
+
     this.credentials = {};
     this.$rootScope = $rootScope;
     this.$state = $state;
@@ -42,5 +41,7 @@ class LoginCtrl {
 
   }
 }
+
+LoginCtrl.$inject = ['$rootScope', '$state', 'Restangular', 'AuthService', 'AUTH_EVENTS'];
 
 export default LoginCtrl;

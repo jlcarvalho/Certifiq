@@ -4,8 +4,6 @@
 
 class ContentEditableDirective {
   constructor ($sce) {
-    'ngInject';
-
     let directive = {
       restrict: 'A', // only activate on element attribute
       require: '?ngModel', // get a hold of NgModelController
@@ -41,5 +39,7 @@ class ContentEditableDirective {
     return directive;
   }
 }
+
+ContentEditableDirective.$inject = ['$sce'];
 
 export default ContentEditableDirective;

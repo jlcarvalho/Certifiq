@@ -4,8 +4,6 @@
 
 class LayouterDirective {
   constructor () {
-    'ngInject';
-
     let directive = {
       restrict: 'E',
       scope: {

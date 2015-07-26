@@ -21,7 +21,8 @@ module.constant('USER_ROLES', {
   guest: 'guest'
 });
 
-module.service('Session', function ($rootScope, Restangular, localStorageService, AUTH_EVENTS) {
+module.service('Session', ['$rootScope', 'Restangular', 'localStorageService', 'AUTH_EVENTS',
+  function ($rootScope, Restangular, localStorageService, AUTH_EVENTS) {
   this.create = function (token, user, userRole) {
     this.token = token;
     this.user = user;
@@ -48,9 +49,10 @@ module.service('Session', function ($rootScope, Restangular, localStorageService
 
     $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
   };
-});
+}]);
 
-module.factory('AuthInterceptor', function ($rootScope, $q, AUTH_EVENTS) {
+module.factory('AuthInterceptor', ['$rootScope', '$q', 'AUTH_EVENTS', function ($rootScope, $q, AUTH_EVENTS) {
+
   return {
     responseError: function (response) {
       $rootScope.$broadcast({
@@ -62,9 +64,9 @@ module.factory('AuthInterceptor', function ($rootScope, $q, AUTH_EVENTS) {
       return $q.reject(response);
     }
   };
-});
+}]);
 
-module.factory('AuthService', function (Restangular, Session, USER_ROLES) {
+module.factory('AuthService', ['Restangular', 'Session', 'USER_ROLES', function (Restangular, Session, USER_ROLES) {
   var authService = {};
 
   authService.newUser = function (data) {
@@ -106,9 +108,10 @@ module.factory('AuthService', function (Restangular, Session, USER_ROLES) {
   };
 
   return authService;
-});
+}]);
 
-module.factory('AuthResolver', function ($q, $rootScope, $state, localStorageService) {
+module.factory('AuthResolver', ['$q', '$rootScope', '$state', 'localStorageService', function ($q, $rootScope, $state, localStorageService) {
+
   return {
     resolve: function () {
       var deferred = $q.defer();
@@ -128,9 +131,9 @@ module.factory('AuthResolver', function ($q, $rootScope, $state, localStorageSer
       return deferred.promise;
     }
   };
-});
+}]);
 
-module.config(function ($httpProvider, localStorageServiceProvider) {
+module.config(['$httpProvider', 'localStorageServiceProvider', function ($httpProvider, localStorageServiceProvider) {
   $httpProvider.interceptors.push([
     '$injector',
     function ($injector) {
@@ -139,9 +142,10 @@ module.config(function ($httpProvider, localStorageServiceProvider) {
   ]);
 
   localStorageServiceProvider.setStorageType('sessionStorage');
-});
+}]);
 
-module.run(function ($rootScope, $state, AUTH_EVENTS, USER_ROLES, AuthService, localStorageService, Session) {
+module.run(['$rootScope', '$state', 'AUTH_EVENTS', 'USER_ROLES', 'AuthService', 'localStorageService', 'Session',
+  function ($rootScope, $state, AUTH_EVENTS, USER_ROLES, AuthService, localStorageService, Session) {
   $rootScope.$on('$stateChangeStart', function (event, next) {
     var authorizedRoles = next.data.authorizedRoles;
     if (!!localStorageService.get('token')) {
@@ -168,7 +172,7 @@ module.run(function ($rootScope, $state, AUTH_EVENTS, USER_ROLES, AuthService, l
   $rootScope.$on(AUTH_EVENTS.logoutSuccess, function(){
     $state.go('login');
   });
-})
+}]);
 
 module.controller('AppCtrl', ['$scope', 'USER_ROLES', 'AuthService' ,function ($scope, USER_ROLES, AuthService) {
   $scope.currentUser = null;

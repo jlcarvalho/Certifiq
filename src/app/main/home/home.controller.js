@@ -1,7 +1,6 @@
 class HomeController {
-  constructor (QueryBuilder, Restangular) {
-    'ngInject';
-      
+  constructor (Restangular) {
+
     this.certificados = [];
 
     var certificados = Restangular.one('certificados');
@@ -13,5 +12,7 @@ class HomeController {
       });
   }
 }
+
+HomeController.$inject = ['Restangular'];
 
 export default HomeController;

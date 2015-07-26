@@ -1,11 +1,10 @@
 function routes ($stateProvider) {
-  'ngInject';
   var resolver = {
-    auth: function (AuthResolver) {
+    auth: ['AuthResolver', function (AuthResolver) {
         return AuthResolver.resolve();
-    }
+    }]
   };
-    
+
   $stateProvider
     .state('home', {
       url: '/',
@@ -38,5 +37,7 @@ function routes ($stateProvider) {
       resolve: resolver
     });
 }
+
+routes.$inject = ['$stateProvider'];
 
 export default routes;

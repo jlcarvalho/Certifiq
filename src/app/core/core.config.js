@@ -1,7 +1,8 @@
 function config ($logProvider) {
-  'ngInject';
   // Enable log
   $logProvider.debugEnabled(true);
 }
+
+config.$inject = ['$logProvider'];
 
 export default config;

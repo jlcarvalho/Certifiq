@@ -1,6 +1,5 @@
 class CertificadoCtrl {
   constructor ($stateParams, Restangular, $scope) {
-    'ngInject';
     this.Restangular = Restangular;
     this.$stateParams = $stateParams;
     this.$scope = $scope;
@@ -71,5 +70,7 @@ class CertificadoCtrl {
     }
   }
 }
+
+CertificadoCtrl.$inject = ['$stateParams', 'Restangular', '$scope'];
 
 export default CertificadoCtrl;

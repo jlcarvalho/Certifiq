@@ -1,7 +1,7 @@
 function routes ($urlRouterProvider) {
-  'ngInject';
-
   $urlRouterProvider.otherwise('/');
 }
+
+routes.$inject = ['$urlRouterProvider'];
 
 export default routes;

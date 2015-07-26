@@ -1,7 +1,5 @@
 class NavbarDirective {
   constructor () {
-    'ngInject';
-
     let directive = {
       restrict: 'E',
       templateUrl: 'app/components/navbar/navbar.html',
@@ -16,25 +14,24 @@ class NavbarDirective {
 
 class NavbarController {
   constructor (AuthService, AUTH_EVENTS, Session, $scope, $state) {
-      'ngInject';
       this.currentState = '';
-      
+
       this.logged = AuthService.isAuthenticated();
       this.Session = Session;
-      
+
       $scope.$watch(function(){
           return $state.current.name;
       }, (state) => {
           this.currentState = state;
       });
-    
-      
+
+
       $scope.$on(AUTH_EVENTS.logoutSuccess, () => {
-         this.logged = AuthService.isAuthenticated(); 
+         this.logged = AuthService.isAuthenticated();
       });
-      
+
       $scope.$on(AUTH_EVENTS.loginSuccess, () => {
-         this.logged = AuthService.isAuthenticated(); 
+         this.logged = AuthService.isAuthenticated();
       });
   }
 
@@ -42,5 +39,7 @@ class NavbarController {
     this.Session.destroy();
   }
 }
+
+NavbarController.$inject = ['AuthService', 'AUTH_EVENTS', 'Session', '$scope', '$state'];
 
 export default NavbarDirective;
