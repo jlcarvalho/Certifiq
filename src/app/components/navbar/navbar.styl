@@ -1,0 +1,58 @@
+@media (min-width: 1200px)
+  .container {
+    width: 970px;
+  }
+
+  [ui-view] .container {
+    width: 800px;
+  }
+
+.navbar {
+  margin: 0 0 30px;
+  padding-top: 10px;
+
+  .navbar-brand {
+    padding:13px 15px;
+
+    img {
+      height: 24px;
+    }
+  }
+
+  .navbar-nav {
+    > li:not(.btn-group) a {
+      color: #666;
+      font-weight: bold;
+    }
+
+    > .active > a,
+    > .active > a:hover,
+    > .active > a:focus,
+    > li > a:hover,
+    > li > a:focus {
+      background: none;
+      color: #337ab7;
+    }
+  }
+
+  .btn {
+    margin: 4px 0;
+    padding: 10px 14px;
+  }
+
+  & li + li.btn-group {
+    > .btn, > .dropdown-menu {
+      margin-left: 10px;
+    }
+  }
+}
+
+.btn-success {
+  background: rgba(57, 181, 74, .8);
+  border-color: rgba(57,181,74,.8);
+
+  &:hover {
+    background: rgba(57,181,74,1);
+    border-color: rgba(57,181,74,1);
+  }
+}

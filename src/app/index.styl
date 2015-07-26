@@ -1,0 +1,130 @@
+/**
+ *  Do not remove this comments bellow. It's the markers used by wiredep to inject
+ *  stylus dependencies when defined in the bower.json of your dependencies
+ */
+// bower:styl
+// endbower
+
+absolute-center(){
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body, .main { height: 100%; }
+body > .main { height: auto; min-height: 100%; }
+.content { padding-bottom: 50px; } /* O padding, deve ser o mesmo valor da altura do rodapé */
+.footer {
+  position: relative;
+  margin-top: -30px; /* Este margin, tem que ser o mesmo valor da altura do rodapé, só que negativo */
+  height: 30px; /* E aqui, fica a altura do rodapé */
+  clear: both;
+}
+
+h1, .h1 {
+  margin-bottom: 40px;
+  margin-top: 40px;
+}
+
+.browsehappy
+  margin 0.2em 0
+  background #ccc
+  color #000
+  padding 0.2em 0
+
+.thumbnail
+  height 200px
+
+  img.pull-right
+    width 50px
+
+.search-bar{
+  margin-bottom: 20px;
+}
+.table {
+  border: 1px solid #e7e7e7;
+
+  > thead > tr,
+  > tbody > tr {
+    th {
+      border: 0
+    }
+
+    th, td {
+      border-top: 1px solid #e7e7e7;
+      padding: 21px;
+    }
+  }
+
+  &.table-certificados {
+    > thead > tr,
+    > tbody > tr {
+      th, td {
+        &:first-child {
+          text-align: center;
+          width: 159px;
+        }
+
+        &:last-child {
+          text-align: center;
+          width: 111px;
+        }
+      }
+    }
+  }
+
+  &.table-pessoas {
+    > thead > tr,
+    > tbody > tr {
+      th, td {
+        &:first-child {
+          width: 60%;
+        }
+
+        &:last-child {
+          width: 40%;
+        }
+      }
+    }
+  }
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: #fcfcfc;
+}
+
+#loading-bar .bar {
+  background: rgba(57, 181, 74, 0.8);
+}
+
+#loading-bar-spinner {
+  background-color: rgba(0,0,0,.2);
+
+  absolute-center()
+
+  .spinner-icon {
+    height: 32px;
+    width: 32px;
+    border-top-color: rgba(57, 181, 74, 0.8);
+    border-left-color: rgba(57,181,74,0.8);
+
+    absolute-center()
+  }
+}
+
+.tab-content > .tab-pane {
+  padding: 20px 0;
+}
+
+/**
+ *  Do not remove this comments bellow. It's the markers used by gulp-inject to inject
+ *  all your stylus files automatically
+ */
+// injector
+// endinjector

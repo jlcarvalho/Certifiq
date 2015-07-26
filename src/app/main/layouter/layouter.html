@@ -1,0 +1,73 @@
+<div class="container">
+
+  <h1>
+    Criação de certificado
+  </h1>
+  <!--<div class="pull-right">-->
+    <!--<a ng-click="layouter.salvar(layouter.form)" class="btn btn-lg">Salvar</a>-->
+  <!--</div>-->
+  <hr>
+
+</div>
+
+
+<wizard on-finish="layouter.salvar()" hide-indicators="true">
+  <wz-step title="Informações" canexit="layouter.exitValidation">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="pull-right">
+            <input class="btn btn-primary btn-lg" type="submit" wz-next value="Continuar" />
+          </div>
+          <h2>Informações do certificado</h2>
+          <div class="form-group">
+            <label for="nomeCertificado">Nome</label>
+            <input type="text"
+                   class="form-control"
+                   id="nomeCertificado"
+                   ng-model="layouter.form.nome"
+                   placeholder="Insira o nome do certificado aqui">
+          </div>
+        </div>
+      </div>
+    </div>
+  </wz-step>
+  <wz-step title="Modelo" canexit="layouter.exitLayouterValidation">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="pull-right">
+            <input class="btn btn-link btn-lg" type="submit" wz-previous value="Voltar" />
+            <input class="btn btn-primary btn-lg" type="submit" wz-next value="Continuar" />
+          </div>
+          <h2>Criação do Modelo</h2>
+        </div>
+      </div>
+    </div>
+    <layouter content="layouter.form.content"
+              template="layouter.form.template"
+              variaveis="layouter.form.variaveis"></layouter>
+  </wz-step>
+  <wz-step title="E-mail">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="pull-right">
+            <input class="btn btn-link btn-lg" type="submit" wz-previous value="Voltar" />
+            <input class="btn btn-success btn-lg" type="submit" wz-next value="Salvar" />
+          </div>
+          <h2>Informações do e-mail</h2>
+          <div class="form-group">
+            <label for="emailCertificado">Conteúdo do e-mail</label>
+            <textarea class="form-control"
+                      id="emailCertificado"
+                      ng-model="layouter.form.email"
+                      placeholder="Insira o conteúdo do email do certificado aqui">
+            </textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </wz-step>
+</wizard>
+

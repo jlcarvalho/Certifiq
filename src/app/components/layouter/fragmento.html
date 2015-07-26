@@ -1,0 +1,37 @@
+<div class="draggable" style="{{item.position}}">
+  <script type="text/ng-template" id="myPopoverTemplate.html">
+      <select ng-model="selectedVariavel" ng-change="ui.variavel(selectedVariavel)">
+        <option ng-value="variavel" ng-repeat="variavel in variaveis">{{::variavel}}</option>
+      </select>
+      <div class="form-group">
+        <label for="nomeCertificado">Nova variável</label>
+        <input type="text" ng-model="novaVariavel" class="form-control">
+      </div>
+      <button class="btn btn-primary" ng-click="ui.novaVariavel(novaVariavel); novaVariavel = ''">Criar</button>
+  </script>
+  <div class="draggableHandle">
+    <i class="fa fa-arrows"></i>
+  </div>
+  <div class="draggableToolbar">
+    <a ng-click="ui.left()"><i class="fa fa-align-left"></i></a>
+    <a ng-click="ui.center()"><i class="fa fa-align-center"></i></a>
+    <a ng-click="ui.right()"><i class="fa fa-align-right"></i></a>
+    <select ng-model="selectedCor" ng-change="ui.corTexto(selectedCor)">
+      <option value="#000">Preto</option>
+      <option value="#FFF">Branco</option>
+    </select>
+    <select ng-options="size as size.name for size in sizes"
+            ng-model="selectedSize"
+            ng-change="ui.size(selectedSize.size)"></select>
+    <button popover-placement="right"
+            popover-template="popover.template"
+            popover-title="Adicionar variável"
+            class="btn btn-info btn-xs">Variáveis</button>
+  </div>
+  <div class="draggableContent"
+       contenteditable
+       name="myWidget"
+       strip-br="true"
+       style="{{item.style}}"
+       ng-model="content">{{item.texto}}</div>
+</div>
