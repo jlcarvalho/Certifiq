@@ -15,17 +15,20 @@ class LoginCtrl {
   }
 
   cadastro (novo) {
-    this.AuthService.newUser({
-      user: novo.username,
-      password: novo.password,
-      nome: novo.nome,
-      email: novo.email
-    }).then((user) => {
-      if(!!user) {
-        this.$rootScope.$broadcast(this.AUTH_EVENTS.loginSuccess);
-        this.$state.go('home');
-      }
-    });
+    if(!!novo && !!novo.username && !!novo.password && !!novo.nome && !!novo.emai){
+      this.AuthService.newUser({
+        user: novo.username,
+        password: novo.password,
+        nome: novo.nome,
+        email: novo.email
+      }).then((user) => {
+        if(!!user) {
+          //this.$rootScope.$broadcast(this.AUTH_EVENTS.loginSuccess);
+          //this.$state.go('home');
+          this.$state.go('confirm');
+        }
+      });
+    }
   }
 
   auth (credentials) {

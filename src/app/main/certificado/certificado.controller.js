@@ -1,8 +1,9 @@
 class CertificadoCtrl {
-  constructor ($stateParams, Restangular, $scope) {
+  constructor ($stateParams, Restangular, $scope, csv) {
     this.Restangular = Restangular;
     this.$stateParams = $stateParams;
     this.$scope = $scope;
+    this.csvService = csv;
     //var qb = new QueryBuilder();
     //var query = qb.isNull('admin', true)
     //              .gte('permissao', 5)
@@ -11,7 +12,7 @@ class CertificadoCtrl {
 
     this.info = {};
     this.form = {};
-    this.csv = false;
+    this.csvFile = false;
     this.pessoas = [];
 
     var certificado = Restangular.one('certificados', $stateParams.id);
@@ -34,28 +35,32 @@ class CertificadoCtrl {
       .one('pessoas')
       .get()
       .then((res) => {
-        this.pessoas = res.data;
+        if(res.error === 1) {
+          this.errorMessage = res.data;
+        } else {
+          this.pessoas = res.data;
+        }
       });
   }
 
-  setCSV (csv){
-    if(['csv'].indexOf(csv.getExtension()) === -1) {
+  setCSV (file){
+    if(['csv'].indexOf(file.getExtension()) === -1) {
         return false;
     }
 
     var fileReader = new FileReader();
-    fileReader.readAsText(csv.file);
+    fileReader.readAsText(file.file);
     fileReader.onload = (event) => {
-      this.csv = event.target.result;
-      this.$scope.$apply();
+      this.csvFile = event.target.result;
+      this.$scope.$digest();
     };
     return true;
   }
 
   certificar (form) {
     var certificar = this.Restangular.all('certificar/' + this.$stateParams.id);
-    if(!!this.csv){
-      certificar.post(CSV2JSON(this.csv)).then(() => {
+    if(!!this.csvFile){
+      certificar.post(this.csvService.toJSON(this.csvFile)).then(() => {
         location.reload();
       });
     } else {
@@ -69,8 +74,14 @@ class CertificadoCtrl {
       }
     }
   }
+
+  codificarDownload (variaveis) {
+    if(!!variaveis){
+      return encodeURIComponent(variaveis.join(',').toLocaleLowerCase() + '\n');
+    }
+  }
 }
 
-CertificadoCtrl.$inject = ['$stateParams', 'Restangular', '$scope'];
+CertificadoCtrl.$inject = ['$stateParams', 'Restangular', '$scope', 'csv'];
 
 export default CertificadoCtrl;

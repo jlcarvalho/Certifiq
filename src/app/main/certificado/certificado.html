@@ -22,7 +22,8 @@
           </div>
         </div>
       </div>
-      <table class="table table-striped table-pessoas">
+      <table class="table table-striped table-pessoas"
+             ng-if="certificado.pessoas.length">
         <thead>
         <tr>
           <th>Participante</th>
@@ -36,6 +37,7 @@
         </tr>
         </tbody>
       </table>
+      <h2 ng-if="certificado.errorMessage">{{::certificado.errorMessage}}</h2>
     </tab>
     <tab heading="Emitir certificado">
       <div class="row">
@@ -44,6 +46,12 @@
             <div class="form-group"
                  flow-init
                  flow-file-added="certificado.setCSV($file)">
+              <a class="btn btn-info"
+                 download="Modelo  {{certificado.info.nome}}.csv"
+                 href="data:application/octet-stream,{{certificado.codificarDownload(certificado.variaveis)}}"
+                 ng-if="certificado.variaveis.length">
+                Modelo de arquivo CSV
+              </a>
               <input ng-disabled="!!certificado.form.nome || !!certificado.form.email"
                      type="button"
                      class="btn btn-primary"
@@ -59,10 +67,11 @@
             <div class="form-group" ng-repeat="variavel in certificado.variaveis track by $index">
               <label for="var-{{$index}}" ng-bind="variavel"></label>
               <input ng-model="certificado.form[variavel.toLowerCase()]"
-                     ng-disabled="certificado.csv"
+                     ng-disabled="certificado.csvFile"
                      type="text"
                      class="form-control"
-                     id="var-{{$index}}">
+                     id="var-{{$index}}"
+                     required>
             </div>
             <button class="btn btn-primary pull-right" type="submit">Emitir certificado</button>
           </form>

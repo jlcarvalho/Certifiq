@@ -13,7 +13,7 @@
       </ul> -->
 
       <ul class="nav navbar-nav pull-right">
-        <li ng-if="!navbar.logged && navbar.currentState !== 'login'">
+        <li ng-if="!navbar.logged && navbar.currentState !== 'login' && navbar.currentState !== 'confirm'">
           <button ui-sref="login" class="btn btn-success">Entrar</button>
         </li>
         <li ng-if="navbar.logged">

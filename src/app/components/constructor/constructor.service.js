@@ -86,12 +86,14 @@ module.factory('AuthService', ['Restangular', 'Session', 'USER_ROLES', function 
 
   authService.login = function (credentials) {
     return Restangular.all('auth').post(credentials).then(function(res) {
-      Session.create(
-        res.data.token,
-        res.data.user,
-        res.data.user.isAdmin ? USER_ROLES.admin : USER_ROLES.guest
-      );
-      return res.data.user;
+      if(res.error !== 1){
+        Session.create(
+          res.data.token,
+          res.data.user,
+          res.data.user.isAdmin ? USER_ROLES.admin : USER_ROLES.guest
+        );
+        return res.data.user;
+      }
     });
   };
 

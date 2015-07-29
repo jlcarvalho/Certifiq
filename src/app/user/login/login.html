@@ -9,16 +9,16 @@
       <h2>Login</h2>
       <form role="form" ng-submit="login.auth(login.credentials)" >
         <div class="form-group">
-          <input type="text" class="form-control" ng-model="login.credentials.username" placeholder="Nome de usuário">
+          <input type="text" class="form-control" required ng-model="login.credentials.username" placeholder="Nome de usuário">
         </div>
         <div class="form-group">
-          <input type="password" class="form-control" ng-model="login.credentials.password" placeholder="Senha">
+          <input type="password" class="form-control" required ng-model="login.credentials.password" placeholder="Senha">
         </div>
         <button type="submit" class="btn btn btn-primary btn-block">
           Entrar
         </button>
       </form>
-      <a href="#">Esqueceu sua senha?</a>
+      <!--<a href="#">Esqueceu sua senha?</a>-->
 
       <!--<div class="login-or">-->
         <!--<hr class="hr-or">-->
@@ -38,16 +38,16 @@
       <h2>Cadastrar</h2>
       <form role="form" ng-submit="login.cadastro(login.novo)" >
         <div class="form-group">
-          <input type="text" class="form-control" ng-model="login.novo.nome" placeholder="Nome">
+          <input type="text" class="form-control" ng-model="login.novo.nome" required placeholder="Nome">
         </div>
         <div class="form-group">
-          <input type="email" class="form-control" ng-model="login.novo.email" placeholder="E-mail">
+          <input type="email" class="form-control" ng-model="login.novo.email" required placeholder="E-mail">
         </div>
         <div class="form-group">
-          <input type="text" class="form-control" ng-model="login.novo.username" placeholder="Nome de usuário">
+          <input type="text" class="form-control" ng-model="login.novo.username" required placeholder="Nome de usuário">
         </div>
         <div class="form-group">
-          <input type="password" class="form-control" ng-model="login.novo.password" placeholder="Senha">
+          <input type="password" class="form-control" ng-model="login.novo.password" required placeholder="Senha">
         </div>
         <button type="submit" class="btn btn btn-primary btn-block">
           Cadastrar

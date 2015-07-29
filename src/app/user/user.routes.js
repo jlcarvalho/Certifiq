@@ -8,6 +8,13 @@ function routes ($stateProvider) {
       data: {
         authorizedRoles: ['all']
       }
+    })
+    .state('confirm', {
+      url: '/confirm',
+      templateUrl: 'app/user/confirm/confirm.html',
+      data: {
+        authorizedRoles: ['all']
+      }
     });
 }
 
