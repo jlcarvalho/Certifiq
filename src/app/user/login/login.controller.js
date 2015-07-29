@@ -15,7 +15,7 @@ class LoginCtrl {
   }
 
   cadastro (novo) {
-    if(!!novo && !!novo.username && !!novo.password && !!novo.nome && !!novo.emai){
+    if(!!novo && !!novo.username && !!novo.password && !!novo.nome && !!novo.email){
       this.AuthService.newUser({
         user: novo.username,
         password: novo.password,
