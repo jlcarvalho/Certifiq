@@ -6,10 +6,12 @@ class FragmentoDirective {
   constructor () {
     let directive = {
       restrict: 'E',
+      replace: true,
       scope: {
           variaveis: '=',
           item: '=',
-          atualizaContent: '='
+          atualizaContent: '=',
+          onRemove: '&'
         },
         templateUrl:  'app/components/layouter/fragmento.html',
         link: function (scope, element) {
@@ -19,11 +21,25 @@ class FragmentoDirective {
           handle: '.draggableHandle'
         });
 
-        draggie.on( 'dragEnd', function() {
-          scope.$apply();
+        draggie.on('dragEnd', function() {
+          scope.atualizaContent();
         });
 
-        scope.popover = {
+        var resizable = element.resizeThis({ noNative: true });
+
+        resizable.on( 'rt:start', function() {
+          scope.onHover = true;
+          scope.$digest();
+        });
+
+        resizable.on( 'rt:stop', function() {
+          scope.onHover = false;
+          scope.$digest();
+          scope.atualizaContent();
+        });
+
+
+          scope.popover = {
           template: 'myPopoverTemplate.html'
         };
 
@@ -42,31 +58,30 @@ class FragmentoDirective {
         scope.selectedCor = '#000';
 
         scope.ui = {
+          removerFragmento: function(){
+            scope.onRemove({$item: scope.item});
+          },
           left: function(){
             element.find('.draggableContent').css('text-align', 'left');
             scope.atualizaContent();
-            scope.$apply();
           },
           right: function(){
             element.find('.draggableContent').css('text-align', 'right');
             scope.atualizaContent();
-            scope.$apply();
           },
           center: function () {
             element.find('.draggableContent').css('text-align', 'center');
             scope.atualizaContent();
-            scope.$apply();
           },
           size: function (value) {
             element.find('.draggableContent').css('font-size', value);
             scope.atualizaContent();
-            scope.$apply();
           },
           variavel: function (value) {
             element.find('.draggableContent').append(' ' + value + ' ');
             scope.selectedVariavel = false;
+            scope.onHover = false;
             scope.atualizaContent();
-            scope.$apply();
           },
           novaVariavel: function (variavel) {
             variavel = '{' + variavel + '}';
@@ -74,14 +89,14 @@ class FragmentoDirective {
             if(scope.variaveis.indexOf(variavel) === -1){
               scope.variaveis.push(variavel);
             }
+            scope.onHover = false;
             scope.atualizaContent();
-            scope.$apply();
           },
-          corTexto: function (value) {
+          corTexto: _.debounce(function (value) {
             element.find('.draggableContent').css('color', value);
+            scope.onHover = false;
             scope.atualizaContent();
-            scope.$apply();
-          }
+          }, 1000)
         };
       }
     };

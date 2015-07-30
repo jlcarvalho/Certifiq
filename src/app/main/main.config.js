@@ -5,6 +5,6 @@ function config ($compileProvider) {
   $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|data):/);
 }
 
-config.$inject = ['$compileProvider']
+config.$inject = ['$compileProvider'];
 
 export default config;

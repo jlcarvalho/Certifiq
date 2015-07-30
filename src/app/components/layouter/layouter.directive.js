@@ -12,7 +12,7 @@ class LayouterDirective {
           template: '='
       },
       templateUrl:  'app/components/layouter/layouter.html',
-        link: function (scope) {
+        link: function (scope, element) {
         scope.fragmentos = [];
 
         scope.atualizaContent = atualizaContent;
@@ -31,6 +31,10 @@ class LayouterDirective {
           }
         };
 
+          scope.removerFragmento = function(item){
+            scope.fragmentos.splice(scope.fragmentos.indexOf(item), 1);
+          };
+
         scope.setBackground = function (image){
           if(['png','gif','jpg','jpeg'].indexOf(image.getExtension()) === -1){
               return false;
@@ -40,12 +44,17 @@ class LayouterDirective {
           fileReader.readAsDataURL(image.file);
           fileReader.onload = (event) => {
             scope.background = 'url(' + event.target.result + ')';
-            scope.$apply();
+            scope.$digest();
             atualizaContent();
-            scope.$apply();
+            scope.$digest();
           };
           return true;
         };
+
+          scope.removeBackground = function(){
+            scope.background = 'url()';
+            atualizaContent();
+          }
 
         scope.$watch('template', function(value){
           if(value){
@@ -67,7 +76,7 @@ class LayouterDirective {
         });
 
         function atualizaContent () {
-          scope.content = document.querySelectorAll("#layouter .pagina")[0].outerHTML;
+          scope.content = element.find('.pagina').clone().wrap('<div>').parent().html();
         }
       }
     };

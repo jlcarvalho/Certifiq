@@ -386,17 +386,18 @@
   }
 
   .draggable {
-    float: left;
     position: relative;
     border: 1px solid #fff;
-    min-width: 360px;
+    width: 420px;
   }
 
   .draggableContent {
     border: 1px solid transparent;
+    height: 100%;
   }
 
-  .draggable:hover .draggableContent{
+  .draggable:hover .draggableContent,
+  .draggable.hover .draggableContent{
     border: 1px solid lightgrey;
     cursor: drag;
     display: block;
@@ -405,7 +406,9 @@
   .draggable.is-dragging { opacity: 0.7; }
 
   .draggable:hover .draggableHandle,
-  .draggable:hover .draggableToolbar{
+  .draggable:hover .draggableToolbar,
+  .draggable.hover .draggableHandle,
+  .draggable.hover .draggableToolbar{
     display: block;
   }
 
@@ -416,7 +419,7 @@
     height: 24px;
     background: lightgrey;
     position: absolute;
-    top: -24px;
+    top: -25px;
     text-align: center;
 
     > i {
@@ -428,7 +431,7 @@
   .draggableToolbar {
     display: none;
     position: absolute;
-    top: -24px;
+    top: -29px;
     right: 0;
     cursor: pointer;
     border-radius: 6px 6px 0px 0px;

@@ -23,7 +23,7 @@ module.constant('USER_ROLES', {
 
 module.service('Session', ['$rootScope', 'Restangular', 'localStorageService', 'AUTH_EVENTS',
   function ($rootScope, Restangular, localStorageService, AUTH_EVENTS) {
-  this.create = function (token, user, userRole) {
+  this.create = (token, user, userRole) => {
     this.token = token;
     this.user = user;
     this.userRole = userRole;
@@ -36,7 +36,7 @@ module.service('Session', ['$rootScope', 'Restangular', 'localStorageService', '
 
     $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
   };
-  this.destroy = function () {
+  this.destroy = () => {
     this.token = null;
     this.user = null;
     this.userRole = null;
