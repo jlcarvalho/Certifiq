@@ -46,5 +46,6 @@ exports.credentials = {
   host: '162.243.199.78',
   username: 'root',
   password: 'mj7vm3jfxt',
-  dest: '/var/www/public'
+  dest: '/var/www/public',
+  readyTimeout: 60000
 };
