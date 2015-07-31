@@ -2,10 +2,7 @@
  * Created by jeanlucasdecarvalhosilva on 29/07/15.
  */
 class csv {
-  constructor (){
-    "use strict";
-
-  }
+  constructor (){}
 
   toArray(strData, strDelimiter) {
     strDelimiter = strDelimiter || ',';

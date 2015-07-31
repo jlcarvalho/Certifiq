@@ -44,7 +44,7 @@ class LayouterCtrl {
                       return this.certificado.put();
                     })
                     .then((certificado) => {
-                      this.$state.go('certifiq.certificado', {id: certificado.data.id});
+                      this.$state.go('certificado', {id: certificado.data.id});
                     });
       } else {
         this.modelos.post({

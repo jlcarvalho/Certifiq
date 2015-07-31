@@ -1,14 +1,14 @@
 class CertificadoCtrl {
-  constructor ($stateParams, Restangular, $scope, csv) {
+  constructor ($stateParams, Restangular, $scope, csv, QueryBuilder) {
     this.Restangular = Restangular;
     this.$stateParams = $stateParams;
     this.$scope = $scope;
     this.csvService = csv;
-    //var qb = new QueryBuilder();
-    //var query = qb.isNull('admin', true)
-    //              .gte('permissao', 5)
-    //              .fields('nome,email')
-    //              .query();
+    var qb = new QueryBuilder();
+    var query = qb.isNull('admin', true)
+                  .gte('permissao', 5)
+                  .fields('nome,email')
+                  .query();
 
     this.info = {};
     this.form = {};
@@ -25,9 +25,13 @@ class CertificadoCtrl {
         var modelo = Restangular.one('modelos', res.data.modelo);
         modelo.get()
               .then(res => {
-                this.variaveis = _.map(res.data.variaveis, function(variavel) {
-                  return _.capitalize(variavel.substr(1).substr(0, variavel.length - 2));
-                });
+                this.variaveis = [];
+                for(var i = 0, len = res.data.variaveis.length; i < len; i++){
+                  var variavel = res.data.variaveis[i];
+                  var string = variavel.substr(1).substr(0, variavel.length - 2);
+
+                  this.variaveis.push(string.charAt(0).toUpperCase() + string.slice(1).toLowerCase());
+                }
               });
       });
 
@@ -82,6 +86,6 @@ class CertificadoCtrl {
   }
 }
 
-CertificadoCtrl.$inject = ['$stateParams', 'Restangular', '$scope', 'csv'];
+CertificadoCtrl.$inject = ['$stateParams', 'Restangular', '$scope', 'csv', 'QueryBuilder'];
 
 export default CertificadoCtrl;
