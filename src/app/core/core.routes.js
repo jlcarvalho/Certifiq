@@ -1,5 +1,5 @@
 function routes ($urlRouterProvider) {
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/home');
 }
 
 routes.$inject = ['$urlRouterProvider'];

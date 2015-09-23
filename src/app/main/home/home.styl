@@ -1,0 +1,109 @@
+.home {
+  .banner{
+    background: center center url('../assets/images/bg-min.jpg') no-repeat;
+    background-size: cover;
+    background-color: #DDD;
+    background-blend-mode: overlay;
+    padding:80px 0;
+    margin-bottom: 30px;
+  }
+
+  layouter {
+    margin-top: 40px;
+    display: block;
+    min-height: 920px;
+  }
+
+  h1 {
+    margin-top: 0;
+    margin-bottom: 40px;
+  }
+  h3 {
+    font-weight: 100;
+    max-width: 640px;
+    margin-bottom: 40px;
+  }
+
+  .hr-home {
+    margin: 60px 0;
+  }
+
+  .price {
+    margin: 40px 0;
+
+    ul {
+      padding: 0;
+    }
+    li {
+      list-style:none;
+    }
+    table { border-collapse:collapse; table-layout:fixed; width:100%; }
+    th { background:#F5F5F5 }
+    td,th { border:1px solid #CCC; padding:10px; empty-cells:show; }
+    td,th {
+      text-align:left;
+    }
+    td+td, th+th {
+      text-align:center;
+      display:none;
+    }
+    .default {
+      display:table-cell;
+    }
+    .bg-purple {
+      border-top:5px solid #009688;
+    }
+    .bg-blue {
+      border-top:5px solid #39b54a;
+    }
+    .txt-p { font-size:14px; }
+    .txt-m { font-size:20px; }
+    .txt-l { font-size:28px; font-weight:bold; }
+    .txt-top { position:relative; top:-9px; left:-2px; }
+    .tick { font-size:18px; color:#2CA01C; }
+    .hide {
+      border:0;
+      background:none;
+    }
+      .corner {
+        border-bottom-color: transparent;
+        border-left-color: transparent;
+      }
+
+    @media (min-width: 640px) {
+      ul {
+        display:none;
+      }
+      td,th {
+        display:table-cell !important;
+      }
+      td,th {
+        width: 330px;
+
+      }
+      td+td, th+th {
+        width: auto;
+      }
+    }
+  }
+
+  .galeria-clientes {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+
+  .img-client {
+    border: 1px solid #fff;
+    border-radius: 3px;
+    opacity: 0.5;
+    -webkit-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+
+    &:hover {
+      border: 1px solid #bbb;
+      opacity: 1;
+    }
+  }
+
+}

@@ -6,7 +6,8 @@ import routes from './main.routes';
 import csv2json from '../components/csv2json/csv2json.service.js';
 import fnUtils from '../components/fnUtils/fnUtils.service.js';
 
-import HomeController from './home/home.controller';
+import HomeController from './home/home.controller.js';
+import DashboardController from './dashboard/dashboard.controller.js';
 import LayouterController from './layouter/layouter.controller';
 import CertificadoController from './certificado/certificado.controller';
 
@@ -22,6 +23,7 @@ export default angular.module('app.main', [core, 'flow', 'mgo-angular-wizard'])
   .service('fn', fnUtils)
 
   .controller('HomeController', HomeController)
+  .controller('DashboardController', DashboardController)
   .controller('LayouterController', LayouterController)
   .controller('CertificadoController', CertificadoController)
 

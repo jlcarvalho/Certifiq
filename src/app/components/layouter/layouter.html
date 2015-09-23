@@ -1,20 +1,43 @@
 <div id="layouter">
-  <div flow-init
+  <div> <!--flow-init
        flow-name="obj.flow"
-       flow-file-added="setBackground($file)">
+       flow-file-added="setBackground($file)" >-->
     <div class="container">
       <div class="row">
         <div class="col-md-12">
           <div>
-            <input type="button" class="btn btn-default" ng-hide="$flow.files.length" flow-btn flow-attrs="{accept:'image/*'}" value="Adcionar imagem de fundo">
-            <input type="button" class="btn btn-default" ng-show="$flow.files.length" flow-btn flow-attrs="{accept:'image/*'}" value="Alterar imagem de fundo">
-            <input type="button" class="btn btn-danger" ng-show="$flow.files.length" ng-click="$flow.cancel(); removeBackground();" value="Remover imagem de fundo">
-            <input type="button" class="btn btn-default" ng-click="ui.adicionarFragmento()" value="Adicionar Texto">
+            <!--<input type="button" class="btn btn-default" ng-hide="$flow.files.length" flow-btn flow-attrs="{accept:'image/*'}" value="Adcionar imagem de fundo">-->
+            <!--<input type="button" class="btn btn-default" ng-show="$flow.files.length" flow-btn flow-attrs="{accept:'image/*'}" value="Alterar imagem de fundo">-->
+            <!--<input type="button" class="btn btn-danger" ng-show="$flow.files.length" ng-click="$flow.cancel(); removeBackground();" value="Remover imagem de fundo">-->
+          </div>
+          <div class="toolbar">
+            <div class="toolbar-title"><span>Construtor de certificados</span></div>
+            <div class="icon-button" tooltip-placement="bottom" tooltip="Adicionar texto" ng-click="ui.adicionarFragmento()">
+              <i class="fa fa-font"></i>
+            </div>
+            <div class="icon-button"
+                 tooltip-placement="bottom"
+                 tooltip="Adicionar imagem"
+                 ng-click="ui.selecionarImagem()">
+              <i class="fa fa-image"></i>
+            </div>
+            <!--<div class="icon-button" tooltip-placement="bottom" tooltip="Selecionar cor de fundo">-->
+              <!--<i class="fa fa-tint"></i>-->
+            <!--</div>-->
+            <div class="icon-button" ng-if="!background" tooltip-placement="bottom" tooltip="Selecionar imagem de fundo"
+                 ng-click="ui.selecionarBackground()">
+              <i class="fa fa-area-chart"></i>
+            </div>
+            <div class="icon-button" ng-if="background" tooltip-placement="bottom" tooltip="Remover imagem de fundo"
+                 ng-click="ui.removerBackground()">
+              <i class="fa fa-times"></i>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="pagina" style="background-image: {{background}}">
+
+    <div class="pagina" style="background-image: url({{background}})">
       <div class="moldura">
         <div class="ctn">
           <draggable-item ng-repeat="fragmento in fragmentos track by $index"

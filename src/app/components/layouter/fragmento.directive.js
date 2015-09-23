@@ -89,7 +89,7 @@ class FragmentoDirective {
           scope.atualizaContent();
         },
         novaVariavel: function (variavel) {
-          variavel = '{' + variavel + '}';
+          variavel = '*|' + variavel + '|*';
           element.find('.draggableContent').append(' ' + variavel + ' ');
           if(scope.variaveis.indexOf(variavel) === -1){
             scope.variaveis.push(variavel);

@@ -1,7 +1,7 @@
 class LoginCtrl {
   constructor ($rootScope, $state, Restangular, AuthService, AUTH_EVENTS) {
     if(AuthService.isAuthenticated()) {
-        $state.go('home');
+        $state.go('dashboard');
     }
 
     this.credentials = {};
@@ -15,27 +15,28 @@ class LoginCtrl {
   }
 
   cadastro (novo) {
+    var self = this;
     if(!!novo && !!novo.username && !!novo.password && !!novo.nome && !!novo.email){
       this.AuthService.newUser({
-        user: novo.username,
+        username: novo.username,
         password: novo.password,
         nome: novo.nome,
         email: novo.email
       }).then((user) => {
         if(!!user) {
-          //this.$rootScope.$broadcast(this.AUTH_EVENTS.loginSuccess);
-          //this.$state.go('home');
-          this.$state.go('confirm');
+          //self.$rootScope.$broadcast(self.AUTH_EVENTS.loginSuccess);
+          //self.$state.go('home');
+          self.$state.go('confirm');
         }
       });
     }
   }
 
   auth (credentials) {
-    this.AuthService.login({user: credentials.username, password: credentials.password}).then((user) => {
+    this.AuthService.login({username: credentials.username, password: credentials.password}).then((user) => {
       if(!!user) {
         this.$rootScope.$broadcast(this.AUTH_EVENTS.loginSuccess);
-        this.$state.go('home');
+        this.$state.go('dashboard');
       }
     });
   }

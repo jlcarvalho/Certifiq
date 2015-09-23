@@ -1,0 +1,33 @@
+<div class="container">
+
+  <h1>Certificados</h1>
+
+  <div class="row search-bar" ng-if="dashboard.certificados.length > 5">
+    <div class="col-sm-offset-6 col-sm-6">
+      <div class="input-group">
+        <input type="text" class="form-control" name="filtroCertificado" ng-model="filtroCertificado" placeholder="Buscar certificado" autofocus />
+        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+      </div>
+    </div>
+  </div>
+
+  <table class="table table-striped table-certificados" ng-if="dashboard.certificados.length">
+    <thead>
+    <tr>
+      <th>Data de criação</th>
+      <th>Certificado</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="certificado in dashboard.certificados | filter:filtroCertificado | orderBy:'id':true track by $index">
+      <td>{{certificado.criadoEm | amDateFormat:'DD/MM/YYYY'}}</td>
+      <td><a ng-href="#/certificado/{{certificado['µ:id']}}">{{certificado.nome}}</a></td>
+      <td></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h3 ng-if="!dashboard.certificados.length">Nenhum certificado encontrado.</h3>
+
+</div>

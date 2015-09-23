@@ -1,15 +1,13 @@
 @media (min-width: 1200px)
   .container {
-    width: 970px;
-  }
-
-  [ui-view] .container {
-    width: 800px;
+    width: 1150px;
   }
 
 .navbar {
-  margin: 0 0 30px;
-  padding-top: 10px;
+  margin: 0;
+  padding: 10px 0;
+  background-color: white;
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.17)
 
   .navbar-brand {
     padding:13px 15px;
@@ -21,8 +19,8 @@
 
   .navbar-nav {
     > li:not(.btn-group) a {
-      color: #666;
-      font-weight: bold;
+      //color: #666;
+      //font-weight: bold;
     }
 
     > .active > a,
@@ -40,9 +38,9 @@
     padding: 10px 14px;
   }
 
-  & li + li.btn-group {
-    > .btn, > .dropdown-menu {
-      margin-left: 10px;
+  & li + li {
+    > .btn {
+      margin-left: 10px !important
     }
   }
 }

@@ -7,10 +7,19 @@ function routes ($stateProvider) {
 
   $stateProvider
     .state('home', {
-      url: '/',
+      url: '/home',
       templateUrl: 'app/main/home/home.html',
       controller: 'HomeController',
       controllerAs: 'home',
+      data: {
+        authorizedRoles: ['all']
+      }
+    })
+    .state('dashboard', {
+      url: '/dashboard',
+      templateUrl: 'app/main/dashboard/dashboard.html',
+      controller: 'DashboardController',
+      controllerAs: 'dashboard',
       data: {
         authorizedRoles: ['guest']
       },

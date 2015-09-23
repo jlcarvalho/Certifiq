@@ -4,46 +4,36 @@ class CertificadoCtrl {
     this.$stateParams = $stateParams;
     this.$scope = $scope;
     this.csvService = csv;
-    var qb = new QueryBuilder();
-    var query = qb.isNull('admin', true)
-                  .gte('permissao', 5)
-                  .fields('nome,email')
-                  .query();
+    //var qb = new QueryBuilder();
+    //var query = qb.isNull('admin', true)
+    //              .gte('permissao', 5)
+    //              .fields('nome,email')
+    //              .query();
 
     this.info = {};
     this.form = {};
     this.csvFile = false;
     this.pessoas = [];
 
-    var certificado = Restangular.one('certificados', $stateParams.id);
+    let modelo = Restangular.one('modelos', $stateParams.id);
 
-    certificado
+    modelo
       .get()
       .then((res) => {
-        this.info = res.data;
+        this.info = res['@graph'][0];
+        this.info.id = $stateParams.id;
+        this.variaveis = _.map(JSON.parse(res['@graph'][0].variaveis), (variavel) => {
+          let string = variavel.substr(1).substr(0, variavel.length - 2);
+          return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+        })
 
-        var modelo = Restangular.one('modelos', res.data.modelo);
-        modelo.get()
-              .then(res => {
-                this.variaveis = [];
-                for(var i = 0, len = res.data.variaveis.length; i < len; i++){
-                  var variavel = res.data.variaveis[i];
-                  var string = variavel.substr(1).substr(0, variavel.length - 2);
-
-                  this.variaveis.push(string.charAt(0).toUpperCase() + string.slice(1).toLowerCase());
-                }
-              });
-      });
-
-    certificado
-      .one('pessoas')
-      .get()
-      .then((res) => {
-        if(res.error === 1) {
-          this.errorMessage = res.data;
-        } else {
-          this.pessoas = res.data;
-        }
+        let certificados = Restangular.one('modelos', $stateParams.id).one('certificados');
+        certificados.get({
+          include: 'pessoas'
+        }).then((res) => {
+          this.info.total = res['µ:meta'].count;
+          this.pessoas = res['@graph'];
+        })
       });
   }
 
@@ -62,17 +52,30 @@ class CertificadoCtrl {
   }
 
   certificar (form) {
-    var certificar = this.Restangular.all('certificar/' + this.$stateParams.id);
+    var certificar = this.Restangular.all('certificados');
     if(!!this.csvFile){
-      certificar.post(this.csvService.toJSON(this.csvFile)).then(() => {
+      certificar.post(_.map(JSON.parse(this.csvService.toJSON(this.csvFile)), (item) => {
+        return {
+          variaveis: item,
+          modelo: {
+            "µ:id": this.$stateParams.id
+          }
+        }
+      })).then(() => {
         location.reload();
       });
     } else {
       if(form && form.nome && form.email){
-        certificar.post([{
-          nome: form.nome,
-          email: form.email
-        }]).then(() => {
+        certificar.post({
+          modelo: {
+            "µ:id": this.$stateParams.id
+          },
+          variaveis: {
+            nome: form.nome,
+            email: form.email
+          }
+        }).then(() => {
+          // ToDo: Sumir com esse reload() daqui e adicionar os itens a lista dinamicamente
           location.reload();
         });
       }

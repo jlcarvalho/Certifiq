@@ -1,5 +1,5 @@
 function config (RestangularProvider) {
-  RestangularProvider.setBaseUrl('http://certifiq.me/api/v1/');
+  RestangularProvider.setBaseUrl('http://localhost:1337/api/');
 }
 
 config.$inject = ['RestangularProvider'];

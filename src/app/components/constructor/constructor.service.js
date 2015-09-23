@@ -70,23 +70,14 @@ module.factory('AuthService', ['Restangular', 'Session', 'USER_ROLES', function 
   var authService = {};
 
   authService.newUser = function (data) {
-    var user = data.user, password = data.password;
-
-    delete data.user;
-    delete data.password;
-
-    return Restangular.all('usuarios').post({
-      login: user,
-      password: password,
-      pessoa: data
-    }).then(function(res){
-      return res.data;
-    })
+    return Restangular.all('usuarios').post(data);
   };
 
   authService.login = function (credentials) {
-    return Restangular.all('auth').post(credentials).then(function(res) {
-      if(res.error !== 1){
+    return Restangular.all('authenticate').post(credentials, {}, {
+      "Content-Type": "application/json"
+    }).then(function(res) {
+      if(res.success){
         Session.create(
           res.data.token,
           res.data.user,

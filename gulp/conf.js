@@ -43,9 +43,9 @@ exports.errorHandler = function(title) {
 
 
 exports.credentials = {
-  host: '162.243.199.78',
+  host: '104.236.55.162',
   username: 'root',
-  password: 'mj7vm3jfxt',
+  password: 'jean2311',
   dest: '/var/www/public',
   readyTimeout: 60000
 };

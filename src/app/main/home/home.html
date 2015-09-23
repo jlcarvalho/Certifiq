@@ -1,33 +1,173 @@
-<div class="container">
+<div class="home">
+  <div class="banner">
+    <div class="container">
 
-  <h1>Certificados</h1>
-
-  <div class="row search-bar" ng-if="home.certificados.length > 5">
-    <div class="col-sm-offset-6 col-sm-6">
-      <div class="input-group">
-        <input type="text" class="form-control" name="filtroCertificado" ng-model="filtroCertificado" placeholder="Buscar certificado" autofocus />
-        <span class="input-group-addon"><i class="fa fa-search"></i></span>
-      </div>
+      <h1>
+        Seus certificados mais fáceis!
+      </h1>
+      <h3>A Certifiq garante a <strong>autenticidade</strong> dos certificados de seu curso ou evento e ainda simplifica a <strong>criação, emissão e gerenciamento</strong> deles.</h3>
+      <h3>Já foram emitidos <strong>7.231 certificados</strong>.</h3>
+      <button ui-sref="login" class="btn btn-lg btn-success">Comece Agora</button>
     </div>
   </div>
 
-  <table class="table table-striped table-certificados" ng-if="home.certificados.length">
-    <thead>
-    <tr>
-      <th>Data de criação</th>
-      <th>Certificado</th>
-      <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat="certificado in home.certificados | filter:filtroCertificado | orderBy:'id':true track by $index">
-      <td>{{certificado.create_date}}</td>
-      <td><a ng-href="#/certificado/{{certificado.id}}">{{certificado.nome}}</a></td>
-      <td></td>
-    </tr>
-    </tbody>
-  </table>
+  <div class="container" id="testar">
+    <div class="text-center">
+      <h2>Crie seu certificado agora!</h2>
+      <p>É fácil criar seu certificado, utilize a ferramenta abaixo para criar seu primeiro modelo de certificado.</p>
+    </div>
+  </div>
 
-  <h3 ng-if="!home.certificados">Nenhum certificado encontrado.</h3>
+  <layouter content="layouter.form.html"
+            template="layouter.form.template"
+            variaveis="layouter.form.variaveis"></layouter>
+
+  <hr class="hr-home"/>
+
+  <div class="container" id="planos">
+
+    <h2 class="text-center">Planos & Preços</h2>
+    <p class="text-center">Escolha um plano e garanta a autenticidade de seus certificados já!</p>
+
+    <div class="price">
+      <ul>
+        <li>
+          <button>Gratuito</button>
+        </li>
+        <li>
+          <button>Inicial</button>
+        </li>
+        <li>
+          <button>Ideal</button>
+        </li>
+        <li>
+          <button>Personalizado</button>
+        </li>
+      </ul>
+
+      <table>
+        <thead>
+        <tr>
+          <th class="hide"></th>
+          <th class="bg-blue">Inicial</th>
+          <th class="bg-blue">Essencial</th>
+          <th class="bg-purple default">Ideal</th>
+          <th class="bg-blue">Personalizado</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>Valor mensal</td>
+          <td><span class="txt-l">Gratuito</span></td>
+          <td><span class="txt-top">R$</span><span class="txt-l">90,00</span></td>
+          <td class="default"><span class="txt-top">R$</span><span class="txt-l">212,50</span></td>
+          <td rowspan="2"><span class="txt-p">Para mais certificados fale conosco.<br /> <a href="mailto:contato@certifiq.com.br">contato@certifiq.com.br</a></span></td>
+        </tr>
+        <tr>
+          <td>Certificados emitidos por mês</td>
+          <td><span class="txt-m">20</span></td>
+          <td><span class="txt-m">200</span></td>
+          <td class="default"><span class="txt-m">1000</span></td>
+        </tr>
+        <tr>
+          <td>Garantia de autenticidade</td>
+          <td><span class="tick">&#10004;</span></td>
+          <td><span class="tick">&#10004;</span></td>
+          <td class="default"><span class="tick">&#10004;</span></td>
+          <td><span class="tick">&#10004;</span></td>
+        </tr>
+        <tr>
+          <td>Certificados impressos</td>
+          <td><span class="tick">&#10004;</span></td>
+          <td><span class="tick">&#10004;</span></td>
+          <td class="default"><span class="tick">&#10004;</span></td>
+          <td><span class="tick">&#10004;</span></td>
+        </tr>
+        <tr>
+          <td>Construtor de certificados</td>
+          <td><span class="tick">&#10004;</span></td>
+          <td><span class="tick">&#10004;</span></td>
+          <td class="default"><span class="tick">&#10004;</span></td>
+          <td><span class="tick">&#10004;</span></td>
+        </tr>
+        <tr>
+          <td>Modelos de certificados</td>
+          <td><span class="tick">&#10004;</span></td>
+          <td><span class="tick">&#10004;</span></td>
+          <td class="default"><span class="tick">&#10004;</span></td>
+          <td><span class="tick">&#10004;</span></td>
+        </tr>
+        <tr>
+          <td>Estatísticas</td>
+          <td></td>
+          <td><span class="tick">&#10004;</span></td>
+          <td class="default"><span class="tick">&#10004;</span></td>
+          <td><span class="tick">&#10004;</span></td>
+        </tr>
+        <tr>
+          <td>API</td>
+          <td></td>
+          <td></td>
+          <td class="default"><span class="tick">&#10004;</span></td>
+          <td><span class="tick">&#10004;</span></td>
+        </tr>
+        <tr>
+          <td>Backup no Google Drive</td>
+          <td></td>
+          <td></td>
+          <td class="default"><span class="tick">&#10004;</span></td>
+          <td><span class="tick">&#10004;</span></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="text-center">
+      <button ui-sref="login" class="btn btn-lg btn-success">Comece Agora</button>
+    </div>
+  </div>
+
+  <hr class="hr-home"/>
+
+  <div class="container" id="clientes">
+    <div class="text-center">
+      <h2>Clientes</h2>
+      <p>Mais de 30 empresas confiam em nós para garantir a autenticidade de seus certificados.</p>
+    </div>
+
+    <div class="row galeria-clientes">
+
+      <div class="col-md-3 col-sm-4 col-xs-6">
+        <a href="http://goiania.startupweekend.org/" target="_blank">
+          <img class="img-responsive img-client" src="assets/images/SWGyn.png" alt="Startup Weekend Goiânia">
+        </a>
+      </div>
+
+      <div class="col-md-3 col-sm-4 col-xs-6">
+        <a href="http://www.ucg.br/" target="_blank">
+          <img class="img-responsive img-client" src="assets/images/PUC.jpg" alt="PUC Goiás">
+        </a>
+      </div>
+
+      <div class="col-md-3 col-sm-4 col-xs-6">
+        <a href="http://www.ndesign.org.br/" target="_blank">
+          <img class="img-responsive img-client" src="assets/images/N_Goiania.png" alt="N Design">
+        </a>
+      </div>
+
+      <div class="col-md-3 col-sm-4 col-xs-6">
+        <a href="http://www.cookie.com.br/" target="_blank">
+          <img class="img-responsive img-client" src="assets/images/Cookie.jpg" alt="Cookie Tecnologia e Marketing">
+        </a>
+      </div>
+
+      <div class="col-md-3 col-sm-4 col-xs-6">
+        <a href="http://www.dracoufg.org/" target="_blank">
+          <img class="img-responsive img-client" src="assets/images/Draco.jpg" alt="Draco UFG">
+        </a>
+      </div>
+
+    </div>
+  </div>
 
 </div>

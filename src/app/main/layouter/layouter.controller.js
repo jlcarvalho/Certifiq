@@ -1,24 +1,20 @@
 class LayouterCtrl {
-  constructor ($state, Restangular) {
+  constructor ($state, Restangular, Session) {
+    this.userId = Session.user['µ:id'];
+
     this.form = {};
     this.form.variaveis = ['{nome}', '{email}'];
 
     this.$state = $state;
     this.modelos = Restangular.all('modelos');
-    this.certificados = Restangular.all('certificados');
 
     if($state.params.id) {
-      this.certificado = Restangular.one('certificados', $state.params.id);
+      this.certificado = Restangular.one('modelos', $state.params.id);
       this.certificado.get().then((res) => {
-        this.form.email = res.data.content;
-        this.form.nome = res.data.nome;
-
-        this.modelo = Restangular.one('modelos', res.data.modelo);
-        this.modelo.get().then((res) => {
-          this.form.variaveis = res.data.variaveis;
-          this.form.template = res.data.content;
-          this.form.content = res.data.content;
-        });
+        this.form.email = res['@graph'][0].conteudo;
+        this.form.nome = res['@graph'][0].nome;
+        this.form.variaveis = JSON.parse(res['@graph'][0].variaveis);
+        this.form.template = res['@graph'][0].html;
       });
     }
 
@@ -30,36 +26,30 @@ class LayouterCtrl {
   }
 
   salvar () {
-    if(this.form && this.form.nome && this.form.content){
+    if(this.form && this.form.nome && this.form.template){
       if(this.$state.params.id){
-        this.modelo.nome = this.form.nome;
-        this.modelo.content = this.form.content;
-        this.modelo.variaveis = this.form.variaveis;
-
-        this.modelo.put()
-                    .then(() => {
-                      this.certificado.nome = this.form.nome;
-                      this.certificado.content = this.form.email;
-
-                      return this.certificado.put();
-                    })
-                    .then((certificado) => {
-                      this.$state.go('certificado', {id: certificado.data.id});
-                    });
+        this.modelos.patch({
+          "µ:id": this.$state.params.id,
+          nome: this.form.nome,
+          html: this.form.html,
+          conteudo: this.form.email,
+          variaveis: JSON.stringify(this.form.variaveis)
+        })
+        .then((modelo) => {
+            console.dir(modelo)
+          this.$state.go('certificado', {id: encodeURIComponent(modelo['@graph'][0]['µ:id'])});
+        });
       } else {
+        console.dir(this.form)
         this.modelos.post({
-                      nome: this.form.nome,
-                      content: this.form.content,
-                      variaveis: this.form.variaveis
-                    }).then((modelo) => {
-                      return this.certificados.post({
-                        nome: this.form.nome,
-                        content: this.form.email,
-                        modelo: modelo.data.id
-                      });
-                    }).then((certificado) => {
-                      this.$state.go('certifiq.certificado', {id: certificado.data.id});
-                    });
+          nome: this.form.nome,
+          html: this.form.html,
+          conteudo: this.form.email,
+          variaveis: JSON.stringify(this.form.variaveis)
+        }).then((modelo) => {
+          console.dir(modelo)
+          this.$state.go('certificado', {id: encodeURIComponent(modelo['@graph'][0]['µ:id'])});
+        })
       }
     }
   }
@@ -71,10 +61,10 @@ class LayouterCtrl {
 
   exitLayouterValidation () {
     var form = this.$parent.$parent.$parent.layouter.form;
-    return !!(form && form.content);
+    return !!(form && form.template);
   }
 }
 
-LayouterCtrl.$inject = ['$state', 'Restangular'];
+LayouterCtrl.$inject = ['$state', 'Restangular', 'Session'];
 
 export default LayouterCtrl;

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-static-top">
+<nav class="navbar navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
       <a class="navbar-brand" ng-href="#/">
@@ -14,6 +14,24 @@
 
       <ul class="nav navbar-nav pull-right">
         <li ng-if="!navbar.logged && navbar.currentState !== 'login' && navbar.currentState !== 'confirm'">
+          <a class="btn btn-link" href="#/home#testar">Testar</a>
+        </li>
+        <!--<li ng-if="!navbar.logged && navbar.currentState !== 'login' && navbar.currentState !== 'confirm'">-->
+          <!--<button class="btn btn-link">Conheça</button>-->
+        <!--</li>-->
+        <!--<li ng-if="!navbar.logged && navbar.currentState !== 'login' && navbar.currentState !== 'confirm'">-->
+          <!--<button class="btn btn-link">Funcionalidades</button>-->
+        <!--</li>-->
+        <li ng-if="!navbar.logged && navbar.currentState !== 'login' && navbar.currentState !== 'confirm'">
+          <a class="btn btn-link" href="#/home#planos">Planos & Preços</a>
+        </li>
+        <li ng-if="!navbar.logged && navbar.currentState !== 'login' && navbar.currentState !== 'confirm'">
+          <a class="btn btn-link" href="#/home#clientes">Clientes</a>
+        </li>
+        <li ng-if="navbar.currentState !== 'login' && navbar.currentState !== 'confirm'">
+          <a class="btn btn-link" href="mailto:contato@certifiq.com.br">Dúvidas?</a>
+        </li>
+        <li ng-if="!navbar.logged && navbar.currentState !== 'login' && navbar.currentState !== 'confirm'">
           <button ui-sref="login" class="btn btn-success">Entrar</button>
         </li>
         <li ng-if="navbar.logged">
@@ -21,7 +39,7 @@
         </li>
         <li ng-if="navbar.logged" class="btn-group" dropdown>
           <button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle>
-            {{navbar.Session.user.nome}} <span class="fa fa-caret-down"></span>
+            {{navbar.Session.user.pessoa.nome}} <span class="fa fa-caret-down"></span>
           </button>
           <ul class="dropdown-menu" role="menu">
             <!--<li><a href="#">Perfil</a></li>
